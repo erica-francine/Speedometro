@@ -15,15 +15,17 @@
     <div class="container d-flex flex-column align-item-center">
         <a href="./index.html" class="btn btn-close border border-secondary bg-light align-self-end m-2"></a>
 
-        <div id="speed"
+        <div style="height: 72vh"
             class="mx-4 bg-dark text-white d-flex flex-column justify-content-center align-items-center border rounded-2">
-            <span >0</span>
+            <span id="speed" style="font-size: 100px;">0</span>
             <span class="display-5">Km/h</span>
         </div>
 
-        <button class="btn btn-success mx-4 my-4 p-3 button">START</button>
-        <button class="btn btn-danger mx-4 my-4 d-none button">STOP</button>
+        <button id="start" class="btn btn-success m-4 p-3 button">START</button>
+        <button id="stop" class="btn btn-danger m-4 p-3 button d-none">STOP</button>
     </div>
+
+    <script src="./speed.js"></script>
 </body>
 
 </html>
