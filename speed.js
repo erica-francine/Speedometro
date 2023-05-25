@@ -16,7 +16,7 @@ START_BTN.addEventListener("click", ()=>{
         console.log(error.msg)
     }
     
-    currentRide = createNewRide() //Criando nova corrida quando ao apertar o start
+    currentRide = createNewRide() //Criando nova corrida quando ao apertar o start e me retornando o ID da corrida
     watchID = navigator.geolocation.watchPosition(handleSuccess, handleError, OPTIONS);
     
     
@@ -35,7 +35,7 @@ STOP_BTN.addEventListener("click", ()=>{
 
     navigator.geolocation.clearWatch(watchID);
     watchID = null;
-    updateStopTime(RIDE_ID);//Atualizando tempo de parada
+    updateStopTime(currentRide);//Atualizando tempo de parada
     currentRide = null;
 });
 

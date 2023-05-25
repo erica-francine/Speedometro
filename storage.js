@@ -8,7 +8,7 @@ function createNewRide(){
         stopTime: null,
     }
 
-    //Armazenando esses dados no localStorage
+    //Armazenando esses dados no localStorage como string
     saveRideRecord(RIDE_ID, RIDE_RECORD);
     return RIDE_ID
 }
@@ -28,6 +28,10 @@ function addPosition(RIDE_ID, position){
     }
     RIDE_RECORD.data.push(NEW_DATA)
     saveRideRecord(RIDE_ID, RIDE_RECORD)//Adicionando dados atualizados no localStorage
+}
+
+function getAllRides(){
+    return Object.entries(localStorage)
 }
 
 function saveRideRecord(RIDE_ID, RIDE_RECORD){
