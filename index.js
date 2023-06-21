@@ -32,18 +32,39 @@ ALL_RIDES.forEach(async ([id, value]) => {
     const DURATION_DIV = document.createElement("div")
     DURATION_DIV.innerText = getDuration(RIDE);
 
-    //Inserindo minha div da localidade dentro da li
-    ITEM_ELEMENT.appendChild(CITY_DIV)
-    //Inserindo minha div da velocidade máxima dentro da li
-    ITEM_ELEMENT.appendChild(MAX_SPEED)
-    //Inserindo minha div do speed dentro da li
-    ITEM_ELEMENT.appendChild(DISTANCE_DIV)
-    //Inserindo minha div da duração da corrida dentro da li
-    ITEM_ELEMENT.appendChild(DURATION_DIV)
+    const DIV_MAP = document.createElement("div")
+    DIV_MAP.id = "map"
+    DIV_MAP.classList.add("w-100")
+    DIV_MAP.classList.add("h-100")
+    DIV_MAP.classList.add("bg-dark")
+    DIV_MAP.classList.add("flex-fill")
+
+    const DIV_DATA_RIDE = document.createElement("div")
+
+    //Inserindo minha localidade, velocidade, distancia e duração na minha div DIV_DATA_RIDE
+    DIV_DATA_RIDE.appendChild(CITY_DIV)
+    DIV_DATA_RIDE.appendChild(MAX_SPEED)
+    DIV_DATA_RIDE.appendChild(DISTANCE_DIV)
+    DIV_DATA_RIDE.appendChild(DURATION_DIV)
+
+   
+    
+    
+    ITEM_ELEMENT.appendChild(DIV_MAP)
+
+    ITEM_ELEMENT.classList.add("my-3")
+    ITEM_ELEMENT.classList.add("d-flex")
+    ITEM_ELEMENT.classList.add("w-100")
+    ITEM_ELEMENT.classList.add("h-100")
+    ITEM_ELEMENT.classList.add("bg-secondary")
+    
+
+    //Inserindo minha div DIV_DATA_RIDE dentro da li
+    ITEM_ELEMENT.appendChild(DIV_DATA_RIDE)
+
     //Inserindo minha li na ul 'rides'
     RIDE_ELEMENT.appendChild(ITEM_ELEMENT)
 
-    console.log(RIDE)
 
 
 })
@@ -112,13 +133,13 @@ function getDuration(ride){
     const STOP_TIME = ride.stopTime
     const DURATION = (STOP_TIME - START_TIME)
 
-    console.log(DURATION)
+
     let seconds = Math.floor(DURATION/1000)
     let hours = Math.floor(seconds/3600)
     seconds %= 3600
     let minutes = Math.floor(seconds/60)
     seconds %= 60
-    console.log(seconds, hours, minutes)
+
 
     const DURATION_FORMATTED = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     return DURATION_FORMATTED
