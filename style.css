@@ -21,5 +21,14 @@
 }
 
 :root,[data-bs-theme=light] {
+    --bs-primary-rgb: 1, 192, 205;
+}
+
+:root,[data-bs-theme=light] {
     --bs-secondary-rgb: 206, 221, 221;
+}
+
+.map{
+    height: 100px;
+    width: 100px;
 }

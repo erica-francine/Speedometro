@@ -20,44 +20,52 @@ ALL_RIDES.forEach(async ([id, value]) => {
     const CITY_DIV = document.createElement("div")
     //Inserindo na div o texto com a cidade e código do país
     CITY_DIV.innerText = `${FIRST_LOCATION.locality} - ${FIRST_LOCATION.countryCode}`
-
+    CITY_DIV.classList.add("text-primary")
+    CITY_DIV.classList.add("fw-bold")
 
     const MAX_SPEED = document.createElement("div")
-    MAX_SPEED.innerText = getMaxSpeed(RIDE.data)
+    MAX_SPEED.innerText = `Max: ${getMaxSpeed(RIDE.data)} km/h`
 
 
     const DISTANCE_DIV = document.createElement("div")
-    DISTANCE_DIV.innerText = getDistance(RIDE.data)
+    DISTANCE_DIV.innerText = `Distância: ${getDistance(RIDE.data)} km`
 
     const DURATION_DIV = document.createElement("div")
-    DURATION_DIV.innerText = getDuration(RIDE);
+    DURATION_DIV.innerText = `Duração: ${getDuration(RIDE)}`;
+
+    const RIDE_DATE_DIV = document.createElement("div")
+    RIDE_DATE_DIV.innerText = `${getRideDate(RIDE)}`
 
     const DIV_MAP = document.createElement("div")
     DIV_MAP.id = "map"
-    DIV_MAP.classList.add("w-100")
-    DIV_MAP.classList.add("h-100")
-    DIV_MAP.classList.add("bg-dark")
-    DIV_MAP.classList.add("flex-fill")
+
+  
+    DIV_MAP.classList.add("map")
+    DIV_MAP.classList.add("me-3")
+    DIV_MAP.classList.add("rounded-3")
+
 
     const DIV_DATA_RIDE = document.createElement("div")
+    DIV_DATA_RIDE.id = "divDataRide"
+
 
     //Inserindo minha localidade, velocidade, distancia e duração na minha div DIV_DATA_RIDE
     DIV_DATA_RIDE.appendChild(CITY_DIV)
     DIV_DATA_RIDE.appendChild(MAX_SPEED)
     DIV_DATA_RIDE.appendChild(DISTANCE_DIV)
     DIV_DATA_RIDE.appendChild(DURATION_DIV)
+    DIV_DATA_RIDE.appendChild(RIDE_DATE_DIV)
 
-   
-    
-    
+
+
     ITEM_ELEMENT.appendChild(DIV_MAP)
 
     ITEM_ELEMENT.classList.add("my-3")
     ITEM_ELEMENT.classList.add("d-flex")
-    ITEM_ELEMENT.classList.add("w-100")
-    ITEM_ELEMENT.classList.add("h-100")
-    ITEM_ELEMENT.classList.add("bg-secondary")
-    
+    ITEM_ELEMENT.classList.add("rounded-3")
+    ITEM_ELEMENT.classList.add("shadow-sm")
+
+
 
     //Inserindo minha div DIV_DATA_RIDE dentro da li
     ITEM_ELEMENT.appendChild(DIV_DATA_RIDE)
@@ -66,6 +74,7 @@ ALL_RIDES.forEach(async ([id, value]) => {
     RIDE_ELEMENT.appendChild(ITEM_ELEMENT)
 
 
+    console.log(RIDE)
 
 })
 
@@ -98,7 +107,7 @@ function getDistance(positions) {
             latitude: positions[i].latitude,
             longitude: positions[i].longitude
         }
-        
+
         const P2 = {
             latitude: positions[i + 1].latitude,
             longitude: positions[i + 1].longitude
@@ -107,11 +116,11 @@ function getDistance(positions) {
         const DELTA_LATITUDE = toRad(P2.latitude - P1.latitude)
         const DELTA_LONGITUDE = toRad(P2.longitude - P1.longitude)
 
-        const A = Math.sin(DELTA_LATITUDE/2) * Math.sin(DELTA_LATITUDE/2) + 
-                  Math.sin(DELTA_LONGITUDE/2)* Math.sin(DELTA_LONGITUDE/2) * 
-                  Math.cos(toRad(P1.latitude)) * Math.cos(toRad(P2.latitude))
+        const A = Math.sin(DELTA_LATITUDE / 2) * Math.sin(DELTA_LATITUDE / 2) +
+            Math.sin(DELTA_LONGITUDE / 2) * Math.sin(DELTA_LONGITUDE / 2) *
+            Math.cos(toRad(P1.latitude)) * Math.cos(toRad(P2.latitude))
 
-        const C = 2 * Math.atan2(Math.sqrt(A), Math.sqrt(1-A)) 
+        const C = 2 * Math.atan2(Math.sqrt(A), Math.sqrt(1 - A))
 
 
         const DISTANCE = EARTH_RADIUS * C
@@ -128,19 +137,26 @@ function getDistance(positions) {
 
 }
 
-function getDuration(ride){
+function getDuration(ride) {
     const START_TIME = ride.startTime
     const STOP_TIME = ride.stopTime
     const DURATION = (STOP_TIME - START_TIME)
 
 
-    let seconds = Math.floor(DURATION/1000)
-    let hours = Math.floor(seconds/3600)
+    let seconds = Math.floor(DURATION / 1000)
+    let hours = Math.floor(seconds / 3600)
     seconds %= 3600
-    let minutes = Math.floor(seconds/60)
+    let minutes = Math.floor(seconds / 60)
     seconds %= 60
 
 
-    const DURATION_FORMATTED = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    const DURATION_FORMATTED = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     return DURATION_FORMATTED
+}
+
+function getRideDate(ride){
+    const RIDE_DATE = ride.startTime
+    const DATE = new Date(RIDE_DATE)
+    const FORMATTED_DATE = `${DATE.getDate()}/${DATE.getMonth()}/${DATE.getFullYear()} ${DATE.getHours()}:${DATE.getMinutes()}`
+    return FORMATTED_DATE
 }
