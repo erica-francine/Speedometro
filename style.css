@@ -25,10 +25,10 @@
 }
 
 :root,[data-bs-theme=light] {
-    --bs-secondary-rgb: 206, 221, 221;
+    --bs-secondary-rgb: 175, 175, 175;
 }
 
 .map{
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
 }

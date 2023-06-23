@@ -11,6 +11,8 @@ ALL_RIDES.forEach(async ([id, value]) => {
 
     const ITEM_ELEMENT = document.createElement("li")
     ITEM_ELEMENT.id = RIDE.id
+    ITEM_ELEMENT.className = "my-3 d-flex rounded-3 shadow-sm p-3 align-items-center"
+    RIDE_ELEMENT.appendChild(ITEM_ELEMENT)
 
     //vai ser a posição 0 do meu array que se encontra no value
     const FIRST_POSITION = RIDE.data[0]
@@ -20,11 +22,13 @@ ALL_RIDES.forEach(async ([id, value]) => {
     const CITY_DIV = document.createElement("div")
     //Inserindo na div o texto com a cidade e código do país
     CITY_DIV.innerText = `${FIRST_LOCATION.locality} - ${FIRST_LOCATION.countryCode}`
-    CITY_DIV.classList.add("text-primary")
-    CITY_DIV.classList.add("fw-bold")
+    CITY_DIV.className = "text-primary fw-bold"
+
+
 
     const MAX_SPEED = document.createElement("div")
     MAX_SPEED.innerText = `Max: ${getMaxSpeed(RIDE.data)} km/h`
+    MAX_SPEED.className = "fw-bold fs-5 my-1"
 
 
     const DISTANCE_DIV = document.createElement("div")
@@ -32,18 +36,15 @@ ALL_RIDES.forEach(async ([id, value]) => {
 
     const DURATION_DIV = document.createElement("div")
     DURATION_DIV.innerText = `Duração: ${getDuration(RIDE)}`;
+    DURATION_DIV.classList.add("mb-1")
 
     const RIDE_DATE_DIV = document.createElement("div")
     RIDE_DATE_DIV.innerText = `${getRideDate(RIDE)}`
+    RIDE_DATE_DIV.className = "mb-1 text-secondary fw-bold"
 
     const DIV_MAP = document.createElement("div")
     DIV_MAP.id = "map"
-
-  
-    DIV_MAP.classList.add("map")
-    DIV_MAP.classList.add("me-3")
-    DIV_MAP.classList.add("rounded-3")
-
+    DIV_MAP.className = "map me-3 rounded-3 bg-secondary"
 
     const DIV_DATA_RIDE = document.createElement("div")
     DIV_DATA_RIDE.id = "divDataRide"
@@ -59,19 +60,11 @@ ALL_RIDES.forEach(async ([id, value]) => {
 
 
     ITEM_ELEMENT.appendChild(DIV_MAP)
-
-    ITEM_ELEMENT.classList.add("my-3")
-    ITEM_ELEMENT.classList.add("d-flex")
-    ITEM_ELEMENT.classList.add("rounded-3")
-    ITEM_ELEMENT.classList.add("shadow-sm")
-
-
-
     //Inserindo minha div DIV_DATA_RIDE dentro da li
     ITEM_ELEMENT.appendChild(DIV_DATA_RIDE)
 
     //Inserindo minha li na ul 'rides'
-    RIDE_ELEMENT.appendChild(ITEM_ELEMENT)
+    
 
 
     console.log(RIDE)
@@ -157,6 +150,13 @@ function getDuration(ride) {
 function getRideDate(ride){
     const RIDE_DATE = ride.startTime
     const DATE = new Date(RIDE_DATE)
-    const FORMATTED_DATE = `${DATE.getDate()}/${DATE.getMonth()}/${DATE.getFullYear()} ${DATE.getHours()}:${DATE.getMinutes()}`
-    return FORMATTED_DATE
+
+    console.log(DATE)
+    const DAY = DATE.toLocaleString("en-US", {day: "numeric"})
+    const MONTH = DATE.toLocaleString("en-US", {month : "long"})
+    const YEAR = DATE.toLocaleString("en-US", {year: "numeric"})
+    const HOUR = DATE.toLocaleString("pt-BR", {hour: "2-digit"})
+    const MINUTES = DATE.toLocaleString("pt-BR", {minute: "2-digit"})
+
+    return `${HOUR}:${MINUTES} - ${MONTH} ${DAY}, ${YEAR}`
 }
