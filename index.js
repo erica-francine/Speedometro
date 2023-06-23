@@ -2,6 +2,7 @@ const RIDE_ELEMENT = document.querySelector("#rides");
 
 const ALL_RIDES = getAllRides()
 
+console.log(ALL_RIDES)
 //Meu getAllRides esta retornando um array com os id's, e o valor da corrida, aqui estou percorrendo esse array
 ALL_RIDES.forEach(async ([id, value]) => {
 
@@ -43,8 +44,9 @@ ALL_RIDES.forEach(async ([id, value]) => {
     RIDE_DATE_DIV.className = "mb-1 text-secondary fw-bold"
 
     const DIV_MAP = document.createElement("div")
-    DIV_MAP.id = "map"
-    DIV_MAP.className = "map me-3 rounded-3 bg-secondary"
+    DIV_MAP.id = `map${RIDE.id}`
+    DIV_MAP.style = "width:120px;height:120px"
+    DIV_MAP.className = "me-3 rounded-3 bg-secondary"
 
     const DIV_DATA_RIDE = document.createElement("div")
     DIV_DATA_RIDE.id = "divDataRide"
@@ -64,10 +66,7 @@ ALL_RIDES.forEach(async ([id, value]) => {
     ITEM_ELEMENT.appendChild(DIV_DATA_RIDE)
 
     //Inserindo minha li na ul 'rides'
-    
 
-
-    console.log(RIDE)
 
 })
 
@@ -151,7 +150,6 @@ function getRideDate(ride){
     const RIDE_DATE = ride.startTime
     const DATE = new Date(RIDE_DATE)
 
-    console.log(DATE)
     const DAY = DATE.toLocaleString("en-US", {day: "numeric"})
     const MONTH = DATE.toLocaleString("en-US", {month : "long"})
     const YEAR = DATE.toLocaleString("en-US", {year: "numeric"})

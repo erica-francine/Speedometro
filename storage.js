@@ -13,9 +13,36 @@ function createNewRide() {
     return RIDE_ID
 }
 
+//Pegando todas as corridas, usando Object.entries para retornar um array com todos os dados do meu objeto corrida
+function getAllRides() {
+    const RIDES = [];
+
+    for(let i=0; i<localStorage.length;i++){
+        const RIDE_ID = localStorage.key(i);
+        const RIDE_VALUE = localStorage.getItem(RIDE_ID);
+
+        RIDES.push([RIDE_ID, RIDE_VALUE]);
+    }
+
+    RIDES.sort((a, b)=> a[0] - b[0]);
+
+    console.log(RIDES)
+    return RIDES
+
+}
+
+//Pegando o valor no meu localStorage para poder adicionar na posição
+function getRideRecord(RIDE_ID) {
+    return JSON.parse(localStorage.getItem(RIDE_ID));
+}
+
+
+function saveRideRecord(RIDE_ID, RIDE_RECORD) {
+    localStorage.setItem(RIDE_ID, JSON.stringify(RIDE_RECORD))//Função para atualizar dados no localStorage
+}
 //Adicionando a posição na minha const RIDE_RECORD
 function addPosition(RIDE_ID, position) {
-    const RIDE_RECORD = getRideRecord(RIDE_ID, position)
+    const RIDE_RECORD = getRideRecord(RIDE_ID)
     const NEW_DATA = {
         accuracy: position.coords.accuracy,
         altitude: position.coords.altitude,
@@ -28,20 +55,6 @@ function addPosition(RIDE_ID, position) {
     }
     RIDE_RECORD.data.push(NEW_DATA)
     saveRideRecord(RIDE_ID, RIDE_RECORD)//Adicionando dados atualizados no localStorage
-}
-
-//Pegando todas as corridas, usando Object.entries para retornar um array com todos os dados do meu objeto corrida
-function getAllRides() {
-    return Object.entries(localStorage)
-}
-
-function saveRideRecord(RIDE_ID, RIDE_RECORD) {
-    localStorage.setItem(RIDE_ID, JSON.stringify(RIDE_RECORD))//Função para atualizar dados no localStorage
-}
-
-//Pegando o valor no meu localStorage para poder adicionar na posição
-function getRideRecord(RIDE_ID) {
-    return JSON.parse(localStorage.getItem(RIDE_ID));
 }
 
 function updateStopTime(RIDE_ID) {

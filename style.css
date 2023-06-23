@@ -27,8 +27,3 @@
 :root,[data-bs-theme=light] {
     --bs-secondary-rgb: 175, 175, 175;
 }
-
-.map{
-    height: 120px;
-    width: 120px;
-}
