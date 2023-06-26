@@ -17,16 +17,15 @@ function createNewRide() {
 function getAllRides() {
     const RIDES = [];
 
-    for(let i=0; i<localStorage.length;i++){
+    for (let i = 0; i < localStorage.length; i++) {
         const RIDE_ID = localStorage.key(i);
         const RIDE_VALUE = localStorage.getItem(RIDE_ID);
 
         RIDES.push([RIDE_ID, RIDE_VALUE]);
     }
 
-    RIDES.sort((a, b)=> a[0] - b[0]);
+    RIDES.sort((a, b) => a[0] - b[0]);
 
-    console.log(RIDES)
     return RIDES
 
 }
