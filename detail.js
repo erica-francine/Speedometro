@@ -1,11 +1,15 @@
-const URL_PARAM = new URLSearchParams(window.location.search);
-const RIDE_ID = URL_PARAM.get("id");
 
-const DATA_RIDE = getRideRecord(RIDE_ID)
-console.log(DATA_RIDE)
-const DIV_DATA = document.querySelector("#dataRide")
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const URL_PARAM = new URLSearchParams(window.location.search);
+    const RIDE_ID = URL_PARAM.get("id");
+    
+    const DATA_RIDE = getRideRecord(RIDE_ID)
+    const DIV_DATA = document.querySelector("#dataRide")
+    const BTN_DELETE = document.querySelector(".btnDelete")
+
+
     //vai ser a posição 0 do meu array que se encontra no value
     const FIRST_POSITION = DATA_RIDE.data[0]
     //Aplicando a fórmula para pegar a localidade
@@ -48,5 +52,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     DIV_DATA.appendChild(DIV_DATA_RIDE)
 
 
+    BTN_DELETE.addEventListener("click", ()=>{
+        deleteRide(RIDE_ID)
+        window.location.href = "./"
+    } )
+    
 })
 

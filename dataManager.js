@@ -87,6 +87,3 @@ function getRideDate(ride){
     return `${HOUR}:${MINUTES} - ${MONTH} ${DAY}, ${YEAR}`
 }
 
-function deleteRide(){
-    
-}

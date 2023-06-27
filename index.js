@@ -53,6 +53,7 @@ ALL_RIDES.forEach(async ([id, value]) => {
     DIV_DATA_RIDE.id = "divDataRide"
 
 
+
     //Inserindo minha localidade, velocidade, distancia e duração na minha div DIV_DATA_RIDE
     DIV_DATA_RIDE.appendChild(CITY_DIV)
     DIV_DATA_RIDE.appendChild(MAX_SPEED)

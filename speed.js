@@ -38,5 +38,6 @@ STOP_BTN.addEventListener("click", ()=>{
     currentRide = null;
     START_BTN.classList.remove("d-none")
     STOP_BTN.classList.add("d-none")
+    window.location.href = "./"
 });
 
