@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const BTN_DELETE = document.querySelector(".btnDelete")
 
 
+
     //vai ser a posição 0 do meu array que se encontra no value
     const FIRST_POSITION = DATA_RIDE.data[0]
     //Aplicando a fórmula para pegar a localidade
@@ -56,6 +57,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteRide(RIDE_ID)
         window.location.href = "./"
     } )
+
+    const MAP = L.map("map").setView([])
+
+
+    
     
 })
 
