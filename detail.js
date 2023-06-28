@@ -72,8 +72,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return [position.latitude, position.longitude]
     })
     
-    console.log(ARRAY_POSITIONS)
-
     const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "#F00"}).addTo(MAP)
 
     MAP.fitBounds(POLYLINE.getBounds())

@@ -21,6 +21,14 @@ ALL_RIDES.forEach(async ([id, value]) => {
     //Aplicando a fórmula para pegar a localidade
     const FIRST_LOCATION = await getLocationData(FIRST_POSITION.latitude, FIRST_POSITION.longitude)
 
+
+
+    const DIV_MAP = document.createElement("div")
+    const MAP_ID = `map${RIDE.id}`
+    DIV_MAP.id = MAP_ID
+    DIV_MAP.style = "width:120px;height:120px"
+    DIV_MAP.className = "me-3 rounded-3 bg-secondary"
+
     const CITY_DIV = document.createElement("div")
     //Inserindo na div o texto com a cidade e código do país
     CITY_DIV.innerText = `${FIRST_LOCATION.locality} - ${FIRST_LOCATION.countryCode}`
@@ -44,10 +52,6 @@ ALL_RIDES.forEach(async ([id, value]) => {
     RIDE_DATE_DIV.innerText = `${getRideDate(RIDE)}`
     RIDE_DATE_DIV.className = "mb-1 text-secondary fw-bold"
 
-    const DIV_MAP = document.createElement("div")
-    DIV_MAP.id = `map${RIDE.id}`
-    DIV_MAP.style = "width:120px;height:120px"
-    DIV_MAP.className = "me-3 rounded-3 bg-secondary"
 
     const DIV_DATA_RIDE = document.createElement("div")
     DIV_DATA_RIDE.id = "divDataRide"
@@ -67,9 +71,26 @@ ALL_RIDES.forEach(async ([id, value]) => {
     //Inserindo minha div DIV_DATA_RIDE dentro da li
     ITEM_ELEMENT.appendChild(DIV_DATA_RIDE)
 
-    ITEM_ELEMENT.addEventListener("click", ()=>{
+    ITEM_ELEMENT.addEventListener("click", () => {
         window.location.href = `detail.html?id=${ITEM_ELEMENT.id}`
     })
-    
+
+
+    const MAP = L.map(MAP_ID, {
+        attributionControl: false,
+        zoomControl: false,
+        dragging: false,
+        scrollWheelZoom: false,
+    })
+
+    MAP.setView([FIRST_POSITION.latitude, FIRST_POSITION.longitude], 13)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 5,
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(MAP);
+    L.marker([FIRST_POSITION.latitude, FIRST_POSITION.longitude]).addTo(MAP)
+
 })
 
