@@ -70,9 +70,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         return [position.latitude, position.longitude]
     })
     
-    const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "F00"}).addTo(MAP)
+    const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "#F00"}).addTo(MAP)
+
+    MAP.fitBounds(POLYLINE.getBounds())
+
+
+    // const MAP = L.map("map")
+    // MAP.setView([45.51, -122.68],15)
+
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     maxZoom: 20,
+    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //   }).addTo(MAP);
+
+    // const ARRAY_POSITIONS = [
+    //     [45.51, -122.68],
+    //     [37.77, -122.43],
+    //     [34.04, -118.2],
+    //     [40.78, -73.91],
+    //     [41.83, -87.62],
+    //     [32.76, -96.72]
+    //   ]
+    
+    // const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "#F00"}).addTo(MAP)
+
 
     // MAP.fitBounds(POLYLINE.getBounds())
+
+
+
     
 })
 
