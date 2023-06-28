@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "F00"}).addTo(MAP)
 
-    MAP.fitBounds(POLYLINE.getBounds())
+    // MAP.fitBounds(POLYLINE.getBounds())
     
 })
 
