@@ -58,10 +58,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "./"
     } )
 
-    const MAP = L.map("map").setView([])
+    const MAP = L.map("map")
+    MAP.setView([FIRST_POSITION.latitude, FIRST_POSITION.longitude],15)
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(MAP);
 
+    const ARRAY_POSITIONS = DATA_RIDE.data.map(position =>{
+        return [position.latitude, position.longitude]
+    })
     
+    const POLYLINE = L.polyline(ARRAY_POSITIONS, {color: "F00"}).addTo(MAP)
+
+    MAP.fitBounds(POLYLINE.getBounds())
     
 })
 
